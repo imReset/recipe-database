@@ -4,66 +4,51 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recipe Database</title>
-    <!-- Latest compiled and minified CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Home</title>
   </head>
   <body>
-    <h1>Submit Form to Mongo</h1>
-
-    <form class="container" method="post" action="/">
-      <div class="form-group">
-        <input
-          class="form-control"
-          name="title"
-          placeholder="Breakfast burriuto"
-        />
-        <input
-          class="form-control"
-          name="description"
-          placeholder="The breakfast burrito, sometimes referred to as a breakfast wrap "
-        />
-      </div>
-      <div class="form-group">
-        <input
-          type="number"
-          class="form-control"
-          name="calories"
-          placeholder="Number of calories"
-        />
-        <input
-          type="number"
-          class="form-control"
-          name="carbs"
-          placeholder="Number of Carbs"
-        />
-        <input
-          type="number"
-          class="form-control"
-          name="protein"
-          placeholder="Number of Protein"
-        />
-      </div>
-      <div class="form-group">
-        <input
-          name="recipe"
-          class="form-control"
-          placeholder="link to recipe"
-        />
-        <input
-          class="form-control"
-          name="ingredients"
-          placeholder="ingredients"
-        />
-        <input class="form-control" name="steps" placeholder="steps" />
-        <input class="form-control" name="video" placeholder="video" />
-      </div>
-      <button>Submit</button>
-    </form>
+    <header>
+      <h1>Welcome to my Beautiful Landing Page</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+      <main>
+        <section id="about">
+          <h2>About Us</h2>
+          <p>
+            Welcome to our website where you'll find the best fitness recipies
+            to help you achieve your health and fitness goals. We believe that
+            healthy eating doesn't have to be boring or bland. We strive to
+            bring your nutrious, delicious, and easy-to-follow recipes that will
+            keep you on track. Whether you're a
+            <strong>seasoned</strong> athelete or just starting your fitness
+            journey, you'll find something that suites your taste and needs.
+            Join us on this journey to be a healthier you!
+          </p>
+        </section>
+        <section id="services">
+          <h2>Services</h2>
+          <ul>
+            <li>Cutting Recipes</li>
+            <li>Bulking Recipes</li>
+          </ul>
+        </section>
+        <h2>Contact Us</h2>
+        <form action="submit-form.php" method="post">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" required></textarea>
+          <input type="submit" value="Submit" />
+        </form>
+      </main>
+    </nav>
   </body>
 </html>

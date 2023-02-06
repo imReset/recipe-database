@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
+app.set("view engine", "ejs");
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect(
@@ -17,10 +19,13 @@ const recipeSchema = new mongoose.Schema({
   calories: Number,
   carbs: Number,
   protein: Number,
-  recipe: String,
   ingredients: String,
   steps: String,
   video: String,
+  slug: {
+    type: String,
+    unique: true,
+  },
 });
 
 const Recipe = mongoose.model("Recipe", recipeSchema);
@@ -29,11 +34,11 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/success", function (req, res) {
-  res.sendFile(__dirname + "/success.html");
+app.get("/new", function (req, res) {
+  res.sendFile(__dirname + "/recipe.html");
 });
 
-app.post("/", function (req, res) {
+app.post("/new", function (req, res) {
   let newRecipe = new Recipe({
     title: req.body.title,
     description: req.body.description,
@@ -43,9 +48,26 @@ app.post("/", function (req, res) {
     ingredients: req.body.ingredients,
     steps: req.body.steps,
     video: req.body.video,
+    slug: req.body.title.toLowerCase().split(" ").join("-"),
   });
   newRecipe.save();
-  res.redirect("/success");
+  res.redirect("/recipes");
+});
+
+app.get("/recipes", (req, res) => {
+  Recipe.find({}, function (err, recipes) {
+    res.render("recipes", {
+      recipeList: recipes,
+    });
+  });
+});
+
+app.get("/recipes/:slug", (req, res) => {
+  Recipe.findOne({ slug: req.params.slug }, function (err, recipe) {
+    res.render("recipe", {
+      recipe: recipe,
+    });
+  });
 });
 
 app.listen(3000, function () {
