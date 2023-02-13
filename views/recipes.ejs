@@ -26,7 +26,7 @@
         </tr>
       </thead>
       <tbody>
-        <%recipeList.forEach(recipe => {%>
+        <%recipeList.findOne(recipe => {%>
         <tr>
           <th scope="row"><%= recipe.title %></th>
           <td><%= recipe.description %></td>
@@ -40,7 +40,6 @@
               ><%= recipe.video %></a
             >
           </td>
-          <td><a href="/recipes/<%= recipe.slug %>">View</a></td>
         </tr>
         <%})%>
       </tbody>

@@ -1,40 +1,77 @@
+require("dotenv").config({ path: "./.env" });
 const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const slugify = require("slugify");
+const session = require("express-session");
+const passport = require("passport");
+const Recipe = require("./models/Recipe");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user");
+
+const app = express();
 
 app.set("view engine", "ejs");
-
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
-mongoose.connect(
-  "mongodb+srv://imreset:Jkcs1439@cluster0.htctb.mongodb.net/recipeDB",
-  { useNewUrlParser: true },
-  { useUnifiedTopology: true }
-); //! Add env later
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
-const recipeSchema = new mongoose.Schema({
-  title: String,
-  description: String,
-  calories: Number,
-  carbs: Number,
-  protein: Number,
-  ingredients: String,
-  steps: String,
-  video: String,
-  slug: {
-    type: String,
-    unique: true,
-  },
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+mongoose.connect(process.env.DB_CONNECT, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
-const Recipe = mongoose.model("Recipe", recipeSchema);
+mongoose
+  .connect(process.env.DB_CONNECT)
+  .then(() => console.log("DB connected"))
+  .catch((err) => console.log(err));
 
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
 app.use(express.static(__dirname + "/public"));
+
+app.get("/login", function (req, res) {
+  res.render("login.ejs");
+});
+
+app.post("/login", function (req, res) {
+  const user = new User({
+    username: req.body.username,
+    password: req.body.password,
+  });
+
+  req.login(user, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      passport.authenticate("local")(req, res, function () {
+        res.redirect("/recipes");
+      });
+    }
+  });
+});
+
+app.get("/register", function (req, res) {
+  res.render("register.ejs");
+});
+
+app.post("/register", function (req, res) {});
 
 app.get("/new", function (req, res) {
   res.sendFile(__dirname + "/recipe.html");
@@ -65,10 +102,11 @@ app.get("/recipes", (req, res) => {
 });
 
 app.get("/recipes/:slug", (req, res) => {
-  Recipe.findOne({ slug: req.params.slug }, function (err, recipe) {
-    res.render("recipe", {
-      recipe: recipe,
-    });
+  const slug = req.params.slug;
+  Recipe.findOne({ slug: slug }, (err, recipe) => {
+    if (err) return res.send(500, { error: err });
+    if (!recipe) return res.send(404, { error: "Not found" });
+    res.render("recipes", { recipe: recipe });
   });
 });
 
