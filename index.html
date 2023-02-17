@@ -1,176 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="public/styles.css" />
-    <title>Home Page</title>
-  </head>
-  <style>
-    body {
-      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-        "Lucida Sans", Arial, sans-serif;
-      background-color: #f2f2f2;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: lightblue;
-      height: 70px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    header h1 {
-      color: white;
-      font-size: 36px;
-      margin: 0;
-    }
-    nav {
-      background-color: lightblue;
-      height: 50px;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 20px;
-      font-size: 18px;
-    }
-    main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2px 0;
-    }
-    section {
-      width: 80%;
-      margin: 50px 0;
-      text-align: center;
-    }
-    section h2 {
-      font-size: 36px;
-      margin: 0 0 20px 0;
-    }
-    section ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    form {
-      width: 75%;
-      margin: 20px 0;
-      flex-direction: column;
-      align-items: center;
-    }
-    form label,
-    form input,
-    form textarea {
-      margin: 20px 0;
-      width: 100%;
-      font-size: 18px;
-    }
-    form input[type="text"],
-    form input[type="email"] {
-      height: 40px;
-      padding: 2px;
-    }
-    form textarea {
-      height: 100px;
-      padding: 2px;
-    }
-    form input[type="submit"] {
-      background-color: rgb(91, 202, 239);
-      color: white;
-      height: 40px;
-      width: 100px;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-    }
 
-    #submit:hover {
-      background-color: rgb(141, 204, 226);
-      transition: ease-in-out 0.2s;
-    }
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="public/styles.css" />
+  <title>Home Page</title>
+</head>
+<style>
+  body {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+  }
 
-    input {
-      border: 2px solid #000;
-      margin-bottom: 15px;
-      padding: 5px;
-      border-radius: 5px;
-    }
+  header {
+    background-color: lightblue;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    input:invalid {
-      border-color: red;
-    }
+  header h1 {
+    color: white;
+    font-size: 36px;
+    margin: 0;
+  }
 
-    input:valid {
-      border-color: green;
-    }
+  nav {
+    background-color: lightblue;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
 
-    label {
-      font-weight: bold;
-    }
-  </style>
-  <body>
-    <header>
-      <h1>Welcome to my Beautiful Landing Page</h1>
-    </header>
-    <nav>
-      <a href="#about">About Us</a>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact Us</a>
-    </nav>
-    <main>
-      <section id="about">
-        <h2>About Us</h2>
-        <p>
-          Welcome to our website where you'll find the best fitness recipies to
-          help you achieve your health and fitness goals. We believe that
-          healthy eating doesn't have to be boring or bland. We strive to bring
-          your nutrious, delicious, and easy-to-follow recipes that will keep
-          you on track. Whether you're a
-          <strong>seasoned</strong> athelete or just starting your fitness
-          journey, you'll find something that suites your taste and needs. Join
-          us on this journey to be a healthier you!
-        </p>
-      </section>
-      <section id="services">
-        <h2>Services</h2>
-        <ul>
-          <li>Cutting Recipes</li>
-          <li>Bulking Recipes</li>
-        </ul>
-      </section>
-      <h2 id="contact">Contact Us</h2>
-      <form action="submit-form.php" method="post">
-        <label for="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder=" John Doe"
-          required
-        />
-        <label for="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder=" johndoe@gmail.com"
-          required
-        />
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" required></textarea>
-        <input type="submit" value="Submit" id="submit" />
-      </form>
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 18px;
+  }
 
-      <a href="/login">Login</a>
-      <a href="/register">Register</a>
-    </main>
-  </body>
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2px 0;
+  }
+
+  section {
+    width: 80%;
+    margin: 50px 0;
+    text-align: center;
+  }
+
+  section h2 {
+    font-size: 36px;
+    margin: 0 0 20px 0;
+  }
+
+  section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  form {
+    width: 75%;
+    margin: 20px 0;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  form label,
+  form input,
+  form textarea {
+    margin: 20px 0;
+    width: 100%;
+    font-size: 18px;
+  }
+
+  form input[type="text"],
+  form input[type="email"] {
+    height: 40px;
+    padding: 2px;
+  }
+
+  form textarea {
+    height: 100px;
+    padding: 2px;
+  }
+
+  form input[type="submit"] {
+    background-color: rgb(91, 202, 239);
+    color: white;
+    height: 40px;
+    width: 100px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  #submit:hover {
+    background-color: rgb(141, 204, 226);
+    transition: ease-in-out 0.2s;
+  }
+
+  input {
+    border: 2px solid #000;
+    margin-bottom: 15px;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  input:invalid {
+    border-color: red;
+  }
+
+  input:valid {
+    border-color: green;
+  }
+
+  label {
+    font-weight: bold;
+  }
+</style>
+
+<body>
+  <header>
+    <h1>Welcome to my Beautiful Landing Page</h1>
+  </header>
+  <nav>
+    <a href="#about">About Us</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact Us</a>
+  </nav>
+  <main>
+    <section id="about">
+      <h2>About Us</h2>
+      <p>
+        Welcome to our website where you'll find the best fitness recipies to
+        help you achieve your health and fitness goals. We believe that
+        healthy eating doesn't have to be boring or bland. We strive to bring
+        your nutrious, delicious, and easy-to-follow recipes that will keep
+        you on track. Whether you're a
+        <strong>seasoned</strong> athelete or just starting your fitness
+        journey, you'll find something that suites your taste and needs. Join
+        us on this journey to be a healthier you!
+      </p>
+    </section>
+    <section id="services">
+      <h2>Services</h2>
+      <ul>
+        <li>Cutting Recipes</li>
+        <li>Bulking Recipes</li>
+      </ul>
+    </section>
+    <h2 id="contact">Contact Us</h2>
+    <form action="submit-form.php" method="post">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder=" John Doe" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder=" johndoe@gmail.com" required />
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required></textarea>
+      <input type="submit" value="Submit" id="submit" />
+    </form>
+
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+  </main>
+</body>
+
 </html>

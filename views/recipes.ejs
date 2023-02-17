@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-      crossorigin="anonymous"
-    />
-  </head>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recipes</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+</head>
+<%= const Recipe=require("./models/Recipe") %>
+
   <body>
     <table class="table">
       <thead>
@@ -19,30 +18,45 @@
           <th scope="col">Description</th>
           <th scope="col">Calories</th>
           <th scope="col">Carbs</th>
-          <th scope="col">Protein</th>
+          <th scope="col">Protein </th>
           <th scope="col">Ingredients</th>
           <th scope="col">Steps</th>
           <th scope="col">Video</th>
         </tr>
       </thead>
       <tbody>
-        <%recipeList.findOne(recipe => {%>
-        <tr>
-          <th scope="row"><%= recipe.title %></th>
-          <td><%= recipe.description %></td>
-          <td><%= recipe.calories %></td>
-          <td><%= recipe.carbs %>g</td>
-          <td><%= recipe.protein %>g</td>
-          <td><%= recipe.ingredients %></td>
-          <td><%= recipe.steps %></td>
-          <td>
-            <a href="<%= recipe.video %>" target="_blank"
-              ><%= recipe.video %></a
-            >
-          </td>
-        </tr>
-        <%})%>
+        <%recipeList.findOne(recipe=> {%>
+          <tr>
+            <th scope="row">
+              <%= recipe.title %>
+            </th>
+            <td>
+              <%= recipe.description %>
+            </td>
+            <td>
+              <%= recipe.calories %>
+            </td>
+            <td>
+              <%= recipe.carbs %>g
+            </td>
+            <td>
+              <%= recipe.protein %>g
+            </td>
+            <td>
+              <%= recipe.ingredients %>
+            </td>
+            <td>
+              <%= recipe.steps %>
+            </td>
+            <td>
+              <a href="<%= recipe.video %>" target="_blank">
+                <%= recipe.video %>
+              </a>
+            </td>
+          </tr>
+          <%})%>
       </tbody>
     </table>
   </body>
+
 </html>

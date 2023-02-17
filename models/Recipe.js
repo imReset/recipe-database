@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 
 const recipeSchema = new mongoose.Schema({
   title: String,
@@ -15,7 +16,7 @@ const recipeSchema = new mongoose.Schema({
   },
 });
 
-recipeSchema.pre("validate", function (next) {
+recipeSchema.pre("validate", function validate(next) {
   if (!this.slug) {
     this.slug = slugify(this.title, { lower: true });
   }
