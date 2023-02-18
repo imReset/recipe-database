@@ -8,6 +8,7 @@ const LocalStrategy = require('passport-local');
 const Recipe = require('./models/recipe');
 const User = require('./models/user');
 
+
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -100,12 +101,16 @@ app.get('/recipes', (req, res) => {
   });
 });
 
-app.get('/recipes/:slug', (req, res) => {
-  const { slug } = req.params;
-  Recipe.find({ slug }, (err, recipe) => {
-    if (err) return res.send(500, { error: err });
-    if (!recipe) return res.send(404, { error: 'Not found' });
-    res.render('recipes', { recipe });
+app.get('/recipes/:id', (req, res) => {
+  const id = req.params.id;
+  Recipe.findById(id, (err, recipe) => {
+    if (err) {
+      console.log("Error!", err);
+    } else if (recipe) {
+      res.render('recipe', {document: recipe});
+    } else {
+      console.log("No such recipe!");
+    }
   });
 });
 
