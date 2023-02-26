@@ -1,9 +1,7 @@
 <div class="px-4 py-5 my-5 text-center">
-  <h1 class="display-5 fw-bold">Submit Your Recipe</h1>
+  <h1 class="display-5 fw-bold">Update Recipe</h1>
   <div class="col-lg-6 mx-auto">
-    <p class="lead">
-      Tired of having all your recipes scattered around? Save them all here...
-    </p>
+    <p class="lead">Change the details of your recipe below</p>
   </div>
 </div>
 
@@ -17,7 +15,11 @@
   <% } %>
 
   <div class="col-8">
-    <form action="/submit-recipe" enctype="multipart/form-data" method="POST">
+    <form
+      action="/edit-recipe/<%=recipe._id%>"
+      enctype="multipart/form-data"
+      method="POST"
+    >
       <div class="row g-3">
         <div class="col-12">
           <label for="name" class="form-label">Recipe Name</label>
@@ -26,7 +28,7 @@
             name="name"
             id="name"
             class="form-control"
-            required
+            value="<%=recipe.name%>"
           />
         </div>
 
@@ -37,7 +39,7 @@
             name="calories"
             id="calories"
             class="form-control"
-            required
+            value="<%=recipe.calories%>"
           />
         </div>
 
@@ -48,7 +50,7 @@
             name="protein"
             id="protein"
             class="form-control"
-            required
+            value="<%=recipe.protein%>"
           />
         </div>
 
@@ -60,8 +62,9 @@
             class="form-control"
             cols="30"
             rows="4"
-            required
-          ></textarea>
+          >
+  <%=recipe.description%></textarea
+          >
         </div>
 
         <div class="col-12">
@@ -90,9 +93,9 @@
             class="form-select form-control"
             name="category"
             aria-label="Category"
-            required
+            value="<%=recipe.category%>"
           >
-            <option selected>Select Category</option>
+            <option>Select Category</option>
             <option value="Thai">Thai</option>
             <option value="American">American</option>
             <option value="Chinese">Chinese</option>
@@ -108,7 +111,7 @@
             id="video"
             class="form-control"
             placeholder="https://www.youtube.com/watch?v=nHj09xU40bM&"
-            required
+            value="<%=recipe.video%>"
           />
         </div>
 
@@ -119,12 +122,12 @@
             class="form-control"
             name="image"
             accept="image/*"
-            required
+            value="<%=recipe.image%>"
           />
         </div>
 
-        <div class="col-12 mb-5">
-          <button type="submit" class="btn btn-primary">Submit Recipe</button>
+        <div class="col-12 mb-5 pt-4">
+          <button type="submit" class="btn btn-primary">Update Recipe</button>
         </div>
       </div>
     </form>
