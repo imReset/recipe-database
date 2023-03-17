@@ -16,11 +16,18 @@
   </div>
   <% } %>
 
+  <style>
+    .required::after {
+      content: " *";
+      color: red;
+    }
+  </style>
+
   <div class="col-8">
     <form action="/submit-recipe" enctype="multipart/form-data" method="POST">
       <div class="row g-3">
         <div class="col-12">
-          <label for="name" class="form-label">Recipe Name</label>
+          <label for="name" class="form-label required">Recipe Name</label>
           <input
             type="text"
             name="name"
@@ -31,7 +38,7 @@
         </div>
 
         <div class="col-12">
-          <label for="calories" class="form-label">Calories:</label>
+          <label for="calories" class="form-label required">Calories:</label>
           <input
             type="number"
             name="calories"
@@ -42,7 +49,7 @@
         </div>
 
         <div class="col-12">
-          <label for="protein" class="form-label">Protein:</label>
+          <label for="protein" class="form-label required">Protein:</label>
           <input
             type="number"
             name="protein"
@@ -53,7 +60,9 @@
         </div>
 
         <div class="col-12">
-          <label for="description" class="form-label">Description</label>
+          <label for="description" class="form-label required"
+            >Instructions:</label
+          >
           <textarea
             name="description"
             id="description"
@@ -65,7 +74,8 @@
         </div>
 
         <div class="col-12">
-          <label for="name" class="form-label">Ingredients</label><br />
+          <label for="name" class="form-label required">Ingredients</label
+          ><br />
           <small>Example: Ice</small>
           <div class="ingredientList">
             <div class="ingredeintDiv mb-1">
@@ -79,13 +89,14 @@
             type="button"
             class="btn btn-outline-primary"
             id="addIngredientsBtn"
+            required
           >
             + Ingredient
           </button>
         </div>
 
         <div class="col-12">
-          <label for="category">Select Category</label>
+          <label for="category" class="required">Select Category</label>
           <select
             class="form-select form-control"
             name="category"
@@ -108,18 +119,16 @@
             id="video"
             class="form-control"
             placeholder="https://www.youtube.com/watch?v=nHj09xU40bM&"
-            required
           />
         </div>
 
         <div class="col-12">
           <label for="image">Product Image</label>
           <input
-            type="file"
+            type="text"
             class="form-control"
             name="image"
-            accept="image/*"
-            required
+            placeholder="https://i.ibb.co/qMthLjb/classic-cheese-pizza-FT-RECIPE0422-31a2c938fc2546c9a07b7011658cfd05.jpg"
           />
         </div>
 

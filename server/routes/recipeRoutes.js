@@ -12,7 +12,6 @@ router.get("/explore-random", recipeController.exploreRandom);
 router.get("/submit-recipe", recipeController.submitRecipe);
 router.post("/submit-recipe", recipeController.submitRecipeOnPost);
 router.get("/edit-recipe/:id", recipeController.editRecipe);
-router.post("/edit-recipe/:id", recipeController.editRecipeOnPost);
 router.post("/delete-recipe/:id", recipeController.deleteRecipe);
 router.get("/contact", recipeController.contact);
 
