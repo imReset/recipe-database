@@ -19,7 +19,7 @@ exports.homepage = async (req, res) => {
 
     res.render("index", { title: "Recipe Database - Home", categories, food });
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Error Occured" });
+    res.status(500).send({ message: error.message || "Error Occured" });
   }
 };
 
@@ -32,7 +32,7 @@ exports.exploreCategories = async (req, res) => {
       categories,
     });
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Error Occured" });
+    res.status(500).send({ message: error.message || "Error Occured" });
   }
 };
 
@@ -48,7 +48,7 @@ exports.exploreCategoriesById = async (req, res) => {
       categoryById,
     });
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Error Occured" });
+    res.status(500).send({ message: error.message || "Error Occured" });
   }
 };
 
@@ -160,64 +160,13 @@ exports.submitRecipeOnPost = async (req, res) => {
   }
 };
 
-exports.editRecipeOnPost = async (req, res) => {
-  try {
-    let recipe = await Recipe.findById(req.params.id);
-
-    let imageUploadFile;
-    let uploadPath;
-    let newImageName;
-
-    if (!req.files || Object.keys(req.files).length === 0) {
-      console.log("No Files where uploaded.");
-    } else {
-      imageUploadFile = req.files.image;
-      newImageName = Date.now() + imageUploadFile.name;
-
-      uploadPath =
-        require("path").resolve("./") + "/public/uploads/" + newImageName;
-
-      imageUploadFile.mv(uploadPath, function (err) {
-        if (err) return res.satus(500).send(err);
-      });
-
-      // Remove old image if a new one was uploaded
-      if (recipe.image) {
-        fs.unlinkSync(
-          require("path").resolve("./") + "/public/uploads/" + recipe.image
-        );
-      } else {
-        // If no new image was uploaded, use the existing image
-        newImageName = recipe.image;
-      }
-    }
-
-    recipe.name = req.body.name;
-    recipe.description = req.body.description;
-    recipe.calories = req.body.calories;
-    recipe.protein = req.body.protein;
-    recipe.ingredients = req.body.ingredients;
-    recipe.video = req.body.video;
-    recipe.category = req.body.category;
-    recipe.image = newImageName;
-
-    await recipe.save();
-
-    req.flash("infoSubmit", "Recipe has been updated.");
-    res.redirect(`/recipe/${recipe.id}`);
-  } catch (error) {
-    req.flash("infoErrors", error);
-    res.redirect(`/edit-recipe/${req.params.id}`);
-  }
-};
-
 exports.deleteRecipe = async (req, res) => {
   try {
     let recipeId = req.params.id;
     await Recipe.findByIdAndDelete(recipeId);
     res.redirect("/explore-latest");
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Error Occured" });
+    res.status(500).send({ message: error.message || "Error Occured" });
   }
 };
 
