@@ -58,7 +58,7 @@ exports.exploreRecipe = async (req, res) => {
     const recipe = await Recipe.findById(recipeId);
     res.render("recipe", { title: "Recipe Database - Recipe", recipe });
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Error Occured" });
+    res.status(500).send({ message: error.message || "Error Occured" });
   }
 };
 
@@ -70,7 +70,7 @@ exports.searchRecipe = async (req, res) => {
     });
     res.render("search", { title: "Reicpe Database - Search", recipe });
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Error Occured" });
+    res.status(500).send({ message: error.message || "Error Occured" });
   }
 };
 
@@ -83,7 +83,7 @@ exports.exploreLatest = async (req, res) => {
       recipe,
     });
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Error Occured" });
+    res.status(500).send({ message: error.message || "Error Occured" });
   }
 };
 
@@ -97,7 +97,7 @@ exports.exploreRandom = async (req, res) => {
       recipe,
     });
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Error Occured" });
+    res.status(500).send({ message: error.message || "Error Occured" });
   }
 };
 
@@ -121,24 +121,6 @@ exports.contact = async (req, res) => {
 
 exports.submitRecipeOnPost = async (req, res) => {
   try {
-    let imageUploadFile;
-    let uploadPath;
-    let newImageName;
-
-    if (!req.files || Object.keys(req.files).length === 0) {
-      console.log("No Files where uploaded.");
-    } else {
-      imageUploadFile = req.files.image;
-      newImageName = Date.now() + imageUploadFile.name;
-
-      uploadPath =
-        require("path").resolve("./") + "/public/uploads/" + newImageName;
-
-      imageUploadFile.mv(uploadPath, function (err) {
-        if (err) return res.satus(500).send(err);
-      });
-    }
-
     const newRecipe = new Recipe({
       name: req.body.name,
       description: req.body.description,
@@ -147,7 +129,7 @@ exports.submitRecipeOnPost = async (req, res) => {
       ingredients: req.body.ingredients,
       video: req.body.video,
       category: req.body.category,
-      image: newImageName,
+      image: req.body.image,
     });
 
     await newRecipe.save();
